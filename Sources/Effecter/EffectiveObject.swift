@@ -45,3 +45,10 @@ public final class EffectiveObject<E>: ObservableObject where E: Effecter {
         )
     }
 }
+
+extension Binding {
+
+    public func `optional`<WrappedValue>() -> Binding<WrappedValue>? where Value == Optional<WrappedValue> {
+        Binding<WrappedValue>(self)
+    }
+}
