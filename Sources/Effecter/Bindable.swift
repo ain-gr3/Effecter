@@ -5,7 +5,7 @@
 import SwiftUI
 
 @propertyWrapper
-public struct Bindable<V> {
+public struct BindableState<V> {
 
     private var binding: Binding<V>
 
