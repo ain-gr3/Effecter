@@ -31,4 +31,17 @@ public final class EffectiveObject<E>: ObservableObject where E: Effecter {
     public func send(_ event: Event) {
         runEffecter(.run(event))
     }
+
+    public func binding<Value>(get keyPath: KeyPath<State, Value>, send event: ((Value) -> Event)? = nil) -> Binding<Value> {
+        Binding(
+            get: {
+                self.state[keyPath: keyPath]
+            },
+            set: { newValue in
+                if let event = event?(newValue) {
+                    self.send(event)
+                }
+            }
+        )
+    }
 }
